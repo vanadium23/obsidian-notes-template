@@ -64,3 +64,5 @@ defaults:
       path: "_notes/**/*.md"
     values:
       layout: "default"
+
+include:             ['_pages']
