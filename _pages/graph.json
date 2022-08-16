@@ -1,0 +1,23 @@
+---
+layout: none
+---
+{
+    "nodes": [
+        {% for post in site.notes %}
+        {
+            "id": "{{ post.url }}"
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+    ],
+    "links": [
+        {% for post in site.notes %}
+            {% for backlink in post.backlinks %}
+                {
+                    "source": "{{ backlink.url }}",
+                    "target": "{{ post.url }}"
+                }{% unless forloop.last and forloop.parentloop.last %},{% endunless %}
+            {% else %}
+            {% endfor %}
+        {% endfor %}
+    ]
+}
