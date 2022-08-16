@@ -59,7 +59,7 @@ permalink: /graph
             opacityScale,
             scale,
             repelForce,
-            fontSize } = graphConfig;
+            fontSize, linkDistance } = graphConfig;
 
         const container = document.getElementById("graph-container")
         const { nodes, links, searchIndex } = await fetchData
@@ -80,11 +80,6 @@ permalink: /graph
             nodes: nodes,
             links: links,
         };
-        console.log(data);
-        console.log(content);
-
-        console.log(data.nodes[0].id);
-        console.log(content[data.nodes[0].id]);
 
         const color = (d) => {
             if (d.id === curPage || (d.id === "/" && curPage === "")) {
@@ -139,9 +134,12 @@ permalink: /graph
                 d3
                     .forceLink(data.links)
                     .id((d) => d.id)
-                    .distance(40),
+                    .distance(linkDistance * 100),
             )
             .force("center", d3.forceCenter())
+            .force("x", d3.forceX())
+            .force("y", d3.forceY())
+            .force("collide",d3.forceCollide().radius(d => d.r * 40))
 
         const svg = d3
             .select("#graph-container")
@@ -191,6 +189,12 @@ permalink: /graph
             const numOut = copyLinks.filter(x => x.source == d.id)?.length || 0
             const numIn = copyLinks.filter(x => x.target == d.id)?.length || 0
             return 2 + Math.sqrt(numOut + numIn)
+        }
+
+        // shorten title
+        function shorten(str, maxLen, separator = ' ') {
+            if (str.length <= maxLen) return str;
+            return str.substr(0, str.lastIndexOf(separator, maxLen)) + '...';
         }
 
         // draw individual nodes
@@ -326,10 +330,10 @@ permalink: /graph
             enableLegend: !1,
             enableZoom: !0,
             fontSize: .5,
-            linkDistance: 0.5,
+            linkDistance: 1,
             opacityScale: 3,
-            repelForce: 0.05,
-            scale: 1.4
+            repelForce: 1.1,
+            scale: 1
         }
     );
 </script>
