@@ -6,6 +6,8 @@ class WikiLinksConverter < Jekyll::Generator
     priority :highest
 
     def generate(site)
+        tooltip = site.config["wikilinks"]["tooltip"]["invalid_link"]
+
         all_notes = site.collections['notes'].docs
         all_pages = site.pages
     
@@ -33,10 +35,10 @@ class WikiLinksConverter < Jekyll::Generator
 
                     if no_title and no_note
                         pattern = "\[\[#{filename}\]\]"
-                        replacement = "<span class='invalid-link'>\[\[#{filename}\]\]</span>"
+                        replacement = "<span title='#{tooltip}' class='invalid-link'>\[\[#{filename}\]\]</span>"
                     elsif not no_title and no_note
                         pattern = "\[\[#{filename}\|#{title}\]\]"
-                        replacement = "<span class='invalid-link'>\[\[#{title}\]\]</span>"
+                        replacement = "<span title='#{tooltip}' class='invalid-link'>\[\[#{title}\]\]</span>"
                     elsif no_title and not no_note
                         pattern = "\[\[#{filename}\]\]"
                         replacement = "\[#{filename}\](#{site.baseurl}#{note_index[filename].url})"

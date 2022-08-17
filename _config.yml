@@ -75,3 +75,7 @@ graph:
 tooltip:
   contentQuerySelector: main
   tooltipLinksQuery: main a
+
+wikilinks:
+  tooltip:
+    invalid_link: Article not found
