@@ -66,3 +66,8 @@ defaults:
       layout: "default"
 
 include:             ['_pages']
+
+graph:
+  pathColors:
+    - /quotes: "#cccccc"
+    - /refs: "#dede30"

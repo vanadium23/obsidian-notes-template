@@ -49,7 +49,7 @@ permalink: /graph
         }))
 
     // https://github.com/jackyzha0/quartz/blob/hugo/assets/js/graph.js
-    async function drawGraph(baseUrl, isHome, pathColors, graphConfig) {
+    async function drawGraph(baseUrl, pathColors, graphConfig) {
 
         let {
             depth,
@@ -59,7 +59,10 @@ permalink: /graph
             opacityScale,
             scale,
             repelForce,
-            fontSize, linkDistance } = graphConfig;
+            fontSize,
+            linkDistance,
+            maxHeight,
+        } = graphConfig;
 
         const container = document.getElementById("graph-container")
         const { nodes, links, searchIndex } = await fetchData
@@ -123,7 +126,7 @@ permalink: /graph
                 .on("end", enableDrag ? dragended : noop)
         }
 
-        const height = Math.max(container.offsetHeight, isHome ? 500 : 250)
+        const height = Math.max(container.offsetHeight, maxHeight)
         const width = container.offsetWidth
 
         const simulation = d3
@@ -139,7 +142,7 @@ permalink: /graph
             .force("center", d3.forceCenter())
             .force("x", d3.forceX())
             .force("y", d3.forceY())
-            .force("collide",d3.forceCollide().radius(d => d.r * 40))
+            .force("collide", d3.forceCollide().radius(d => d.r * 40))
 
         const svg = d3
             .select("#graph-container")
@@ -318,22 +321,23 @@ permalink: /graph
     container.textContent = ""
 
     const drawGlobal = true;
+    const baseUrl = "{{ site.url }}";
+    const pathColors = {{ site.graph.pathColors | jsonify }};
 
-    drawGraph(
-        "http://localhost:4000",
-        true,
-        [{ "/quotes": "#cccccc" }],
-        {
-            centerForce: 1,
-            depth: -1,
-            enableDrag: !0,
-            enableLegend: !1,
-            enableZoom: !0,
-            fontSize: .5,
-            linkDistance: 1,
-            opacityScale: 3,
-            repelForce: 1.1,
-            scale: 1
-        }
-    );
+    const graphConfig = {
+        centerForce: 1,
+        depth: -1,
+        enableDrag: 1,
+        enableLegend: 1,
+        enableZoom: 1,
+        fontSize: .5,
+        linkDistance: 1,
+        opacityScale: 3,
+        repelForce: 1.1,
+        scale: 1,
+        maxHeight: drawGlobal ? 500 : 250,
+    };
+
+    drawGraph(baseUrl, pathColors, graphConfig);
+
 </script>
