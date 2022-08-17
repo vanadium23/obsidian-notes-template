@@ -71,3 +71,7 @@ graph:
   pathColors:
     - /quotes: "#cccccc"
     - /refs: "#dede30"
+
+tooltip:
+  contentQuerySelector: main
+  tooltipLinksQuery: main a
