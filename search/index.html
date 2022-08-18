@@ -1,4 +1,80 @@
-<!-- https://github.com/maximevaillancourt/digital-garden-jekyll-template/blob/master/_includes/link-previews.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/svg+xml" href="/obsidian-notes-template/assets/open-cardboard-box.svg">
+  <link rel="stylesheet" href="/obsidian-notes-template/assets/css/base.css">
+
+  
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Search | Your awesome title</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Search" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Your awesome title" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Search" />
+<meta name="twitter:site" content="@vanadium23" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Search","url":"/obsidian-notes-template/search/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <nav class="u-background"><div class="u-wrapper Banner">
+    <a class="Banner-link u-clickable" href="/obsidian-notes-template/">
+        Your awesome title
+    </a>
+    <ul class="Banner">
+        
+            <li class="Banner-item">
+                <a class="Banner-link u-clickable" href="/obsidian-notes-template/graph">Graph</a>
+            </li>
+        
+            <li class="Banner-item">
+                <a class="Banner-link u-clickable" href="/obsidian-notes-template/search">Search 🔍</a>
+            </li>
+        
+    </ul>
+</div>
+</nav>
+    <div class="container">
+      <main><h3>Search</h3>
+
+<!-- HTML elements for search -->
+<input type="text" id="search-input">
+<ul id="results-container"></ul>
+
+<hr>
+
+<h4>Last 50 notes</h4>
+
+<ul>
+
+
+<li><span>2022-01-16</span>&nbsp;<a href="/obsidian-notes-template/enter-the-box/">Enter the box</a></li>
+
+</ul>
+
+<!-- or without installing anything -->
+<script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+<script>
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/_pages/search.json'
+    });
+</script>
+</main>
+      <footer></footer>
+    </div>
+
+    <!-- https://github.com/maximevaillancourt/digital-garden-jekyll-template/blob/master/_includes/link-previews.html -->
 <!-- That file is not particularly elegant. This will need a refactor at some point. -->
 <style>
     content a.internal-link {
@@ -44,8 +120,8 @@
 </iframe>
 
 <script>
-    const tooltipContentSelector = "{{ site.tooltip.contentQuerySelector }}";
-    const tooltipLinksQuery = "{{ site.tooltip.tooltipLinksQuery }}";
+    const tooltipContentSelector = "main";
+    const tooltipLinksQuery = "main a";
 
     var opacityTimeout;
     var contentTimeout;
@@ -132,3 +208,17 @@
 
     document.querySelectorAll(tooltipLinksQuery).forEach(setupListeners);
 </script>
+
+    <script src="https://unpkg.com/mermaid@8.9.3/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    mermaid.initialize({
+      startOnLoad:true,
+      theme: "default",
+    });
+    window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+  }, false);
+</script>
+    
+  </body>
+</html>

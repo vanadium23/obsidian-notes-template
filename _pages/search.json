@@ -1,14 +1,11 @@
----
-layout: none
----
 [
-  {% for post in site.notes %}
+  
     {
-      "title"    : "{{ post.title | escape }}",
-      "category" : "{{ post.category }}",
-      "tags"     : "{{ post.tags | join: ', ' }}",
-      "url"      : "{{ site.baseurl }}{{ post.url }}",
-      "date"     : "{{ post.date }}"
-    } {% unless forloop.last %},{% endunless %}
-  {% endfor %}
+      "title"    : "Enter the box",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/obsidian-notes-template/enter-the-box/",
+      "date"     : "2022-01-16 08:19:50 +0000"
+    } 
+  
 ]

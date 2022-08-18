@@ -1,7 +1,4 @@
----
-layout: none
----
 {
-    "nodes": {{ site.data.graph_nodes | jsonify }},
-    "links": {{ site.data.graph_edges | jsonify }}
+    "nodes": [{"id":"/enter-the-box/"}],
+    "links": []
 }
