@@ -2,9 +2,9 @@
 dg-publish: true
 date: "2022-01-16T11:19:50+03:00"
 modified_at: "2022-01-16T11:19:50+03:00"
-permalink: "/enter-the-box/"
+permalink: "/close-the-shelf/"
 dgHomeLink: false
 dgPassFrontmatter: true
 ---
 
-Enter the Obsidian <> jekyll notes.
+Just a note to test connection with [[enter the box]].

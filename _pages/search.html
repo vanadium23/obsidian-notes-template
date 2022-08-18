@@ -27,6 +27,6 @@ permalink: /search/
     SimpleJekyllSearch({
         searchInput: document.getElementById('search-input'),
         resultsContainer: document.getElementById('results-container'),
-        json: '/_pages/search.json'
+        json: "{{ '/_pages/search.json' | absolute_url }}"
     });
 </script>

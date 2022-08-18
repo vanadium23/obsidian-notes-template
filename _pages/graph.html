@@ -33,13 +33,13 @@ permalink: /graph/
 </style>
 <script>
     const fetchData = Promise.all([
-        fetch("/_pages/graph.json")
+        fetch("{{ '/_pages/graph.json' | absolute_url }}")
             .then(data => data.json())
             .then(data => ({
                 nodes: data.nodes,
                 links: data.links,
             })),
-        fetch("/_pages/search.json")
+        fetch("{{ '/_pages/search.json' | absolute_url }}")
             .then(data => data.json()),
     ])
         .then(([{ nodes, links }, searchIndex]) => ({
