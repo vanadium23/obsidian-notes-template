@@ -18,6 +18,7 @@ class BacklinksGenerator < Jekyll::Generator
             # Nodes: Graph
             graph_nodes << {
                 id: current_note.url,
+                title: current_note.data['title'],
             }
     
             # Edges: Jekyll

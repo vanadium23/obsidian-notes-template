@@ -32,20 +32,11 @@ permalink: /graph/
 
 </style>
 <script>
-    const fetchData = Promise.all([
-        fetch("{{ '/_pages/graph.json' | absolute_url }}")
-            .then(data => data.json())
-            .then(data => ({
-                nodes: data.nodes,
-                links: data.links,
-            })),
-        fetch("{{ '/_pages/search.json' | absolute_url }}")
-            .then(data => data.json()),
-    ])
-        .then(([{ nodes, links }, searchIndex]) => ({
-            nodes,
-            links,
-            searchIndex,
+    const fetchData = fetch("{{ '/_pages/graph.json' | absolute_url }}")
+        .then(data => data.json())
+        .then(data => ({
+            nodes: data.nodes,
+            links: data.links,
         }))
 
     // https://github.com/jackyzha0/quartz/blob/hugo/assets/js/graph.js
@@ -65,10 +56,10 @@ permalink: /graph/
         } = graphConfig;
 
         const container = document.getElementById("graph-container")
-        const { nodes, links, searchIndex } = await fetchData
+        const { nodes, links } = await fetchData
         // just key => value for url => title
-        const content = searchIndex.reduce(
-            (prev, current) => { prev[current.url] = current.title; return prev },
+        const content = nodes.reduce(
+            (prev, current) => { prev[current.id] = current.title; return prev },
             {}
         );
 
@@ -211,7 +202,7 @@ permalink: /graph/
             .on("click", (_, d) => {
                 // SPA navigation
                 const url = decodeURI(d.id);
-                window.open(url, '_blank').focus();
+                window.open(`${baseUrl}${url}`, '_blank').focus();
             })
             .on("mouseover", function (_, d) {
                 d3.selectAll(".node").transition().duration(100).attr("fill", "var(--g-node-inactive)")
@@ -321,7 +312,7 @@ permalink: /graph/
     container.textContent = ""
 
     const drawGlobal = true;
-    const baseUrl = "{{ site.url }}";
+    const baseUrl = "{{ site.url }}{{ site.baseurl }}";
     const pathColors = {{ site.graph.pathColors | jsonify }};
 
     const graphConfig = {
