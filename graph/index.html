@@ -72,20 +72,11 @@
 
 </style>
 <script>
-    const fetchData = Promise.all([
-        fetch("/obsidian-notes-template/_pages/graph.json")
-            .then(data => data.json())
-            .then(data => ({
-                nodes: data.nodes,
-                links: data.links,
-            })),
-        fetch("/obsidian-notes-template/_pages/search.json")
-            .then(data => data.json()),
-    ])
-        .then(([{ nodes, links }, searchIndex]) => ({
-            nodes,
-            links,
-            searchIndex,
+    const fetchData = fetch("/obsidian-notes-template/_pages/graph.json")
+        .then(data => data.json())
+        .then(data => ({
+            nodes: data.nodes,
+            links: data.links,
         }))
 
     // https://github.com/jackyzha0/quartz/blob/hugo/assets/js/graph.js
@@ -105,10 +96,10 @@
         } = graphConfig;
 
         const container = document.getElementById("graph-container")
-        const { nodes, links, searchIndex } = await fetchData
+        const { nodes, links } = await fetchData
         // just key => value for url => title
-        const content = searchIndex.reduce(
-            (prev, current) => { prev[current.url] = current.title; return prev },
+        const content = nodes.reduce(
+            (prev, current) => { prev[current.id] = current.title; return prev },
             {}
         );
 
@@ -251,7 +242,7 @@
             .on("click", (_, d) => {
                 // SPA navigation
                 const url = decodeURI(d.id);
-                window.open(url, '_blank').focus();
+                window.open(`${baseUrl}${url}`, '_blank').focus();
             })
             .on("mouseover", function (_, d) {
                 d3.selectAll(".node").transition().duration(100).attr("fill", "var(--g-node-inactive)")
@@ -361,7 +352,7 @@
     container.textContent = ""
 
     const drawGlobal = true;
-    const baseUrl = "";
+    const baseUrl = "/obsidian-notes-template";
     const pathColors = [{"/moc":"#aeaeae"}];
 
     const graphConfig = {

@@ -1,4 +1,4 @@
 {
-    "nodes": [{"id":"/close-the-shelf/"},{"id":"/enter-the-box/"}],
+    "nodes": [{"id":"/close-the-shelf/","title":"Close the shelf"},{"id":"/enter-the-box/","title":"Enter the box"}],
     "links": [{"source":"/close-the-shelf/","target":"/enter-the-box/"}]
 }
