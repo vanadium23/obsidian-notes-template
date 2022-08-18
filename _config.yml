@@ -1,6 +1,14 @@
 title: Your awesome title
 language: "en"
+locale: "en_US"
 baseurl: ""
+
+plugins:
+  - jekyll-seo-tag
+
+twitter:
+  username: vanadium23
+  card: summary
 
 collections:
   notes:
@@ -11,7 +19,7 @@ defaults:
   - scope:
       path: "_notes/**/*.md"
     values:
-      layout: "default"
+      layout: "note"
 
 include: ["_pages"]
 
@@ -32,3 +40,7 @@ nav:
     url: "graph"
   - label: Search 🔍
     url: "search"
+
+# exclude quotes path
+quotes:
+  exclude_categories: []
