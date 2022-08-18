@@ -73,13 +73,13 @@
 </style>
 <script>
     const fetchData = Promise.all([
-        fetch("/_pages/graph.json")
+        fetch("/obsidian-notes-template/_pages/graph.json")
             .then(data => data.json())
             .then(data => ({
                 nodes: data.nodes,
                 links: data.links,
             })),
-        fetch("/_pages/search.json")
+        fetch("/obsidian-notes-template/_pages/search.json")
             .then(data => data.json()),
     ])
         .then(([{ nodes, links }, searchIndex]) => ({
