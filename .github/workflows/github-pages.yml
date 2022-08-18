@@ -1,0 +1,25 @@
+name: Build and deploy Jekyll site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  github-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - uses: helaili/jekyll-action@2.3.1
+        env:
+          TELEGRAM_PUBLISHER_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          jekyll_build_options: --config _config.yml,_config.github.yml
+          keep_history: true
