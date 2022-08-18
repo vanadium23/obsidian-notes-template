@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<article>
+  <header class="Heading">
+    <h1 class="Heading-title">{{ page.title }}</h1>
+    <div class="Heading-additional">
+      {% if page.date %}
+      <time datetime="{{ page.date | date_to_xmlschema }}">{% if page.type != 'pages' %}
+        Создано {{ page.date | date: "%Y-%m-%d" }}
+        {% endif %}
+      </time>&middot;
+      {% endif %}
+      {% if page.modified_at %}
+      <time datetime="{{ page.modified_at | date_to_xmlschema }}">{% if page.type != 'pages' %}
+        Обновлено {{ page.modified_at | date: "%Y-%m-%d" }}
+        {% endif %}
+      </time>
+      {% endif %}
+    </div>
+  </header>
+
+  <div id="notes-entry-container">
+    <content>
+      {{ content }}
+    </content>
+
+    {% if page.backlinks.size > 0 %}
+    <side class="backlink">
+      <h3 style="margin-bottom: 1em">Обратные ссылки</h3>
+      <div class="backlink-boxes">
+      {% for backlink in page.backlinks %}
+        {% unless backlink.url contains "quotes" and site.quotes.exclude_categories contains page.category %}
+        <div class="backlink-box">
+        <a class="internal-link" href="{{ site.baseurl }}{{ backlink.url }}{%- if site.use_html_extension -%}.html{%- endif -%}">{{ backlink.title }}</a><br>
+        <div>{{ backlink.excerpt | strip_html | truncatewords: 15 }}</div>
+        </div>
+        {% endunless %}
+      {% endfor %}
+      </div>
+    </side>
+    {% endif %}
+  </div>
+</article>
