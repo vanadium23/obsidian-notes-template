@@ -3,11 +3,10 @@
         {{ site.title }}
     </a>
     <ul class="Banner">
-        <li class="Banner-item">
-            <a class="Banner-link u-clickable" href="{{ 'graph' | absolute_url }}">Граф</a>
-        </li>
-        <li class="Banner-item">
-            <a class="Banner-link u-clickable" href="{{ 'search' | absolute_url }}">Поиск 🔍</a>
-        </li>
+        {% for nav_link in site.nav %}
+            <li class="Banner-item">
+                <a class="Banner-link u-clickable" href="{{ nav_link.url | absolute_url }}">{{ nav_link.label }}</a>
+            </li>
+        {% endfor %}
     </ul>
 </div>
