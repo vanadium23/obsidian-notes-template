@@ -524,3 +524,8 @@ div.highlight {
   padding: 1em;
   border-radius: 4px;
 }
+
+#search-input {
+  width: 100%;
+  font-size: 1.25em;
+}
